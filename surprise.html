@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine 2026 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body{
+  margin:0;
+  font-family:'Playfair Display', serif;
+  background:#0b0c27;
+  color:#fff;
+  overflow:hidden;
+  position:relative;
+}
+
+/* Counter */
+#counter{
+  position:absolute;
+  top:20px;
+  right:20px;
+  font-family:'Playfair Display', serif;
+  font-size:1rem;
+  color:#ff0b40ea;
+  text-shadow:0 0 8px #ff0b57;
+  z-index:200;
+  display:none;
+}
+
+/* SECTION */
+.section{
+  width:100%;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  position:relative;
+  z-index:10;
+  gap:20px;
+  text-align:center;
+}
+
+/* TITLE */
+h1{
+  font-family:'Dancing Script', cursive;
+  font-size:3rem;
+  color:#ff270b;
+  text-shadow:0 0 15px #ff0b57;
+  margin-bottom:20px;
+}
+
+/* BUTTONS: subtle glow */
+button{
+  padding:14px 32px;
+  margin:10px;
+  border:none;
+  border-radius:40px;
+  font-family:'Dancing Script', cursive;
+  font-size:1.6rem;
+  color:#fff;
+  background:linear-gradient(135deg,#ff6b81,#ff0b57);
+  border:2px solid #ff0b57;
+  cursor:pointer;
+  transition:0.3s;
+  z-index:10;
+  box-shadow:0 4px 12px rgba(255,11,64,0.3);
+}
+button:hover{
+  transform:scale(1.08);
+  color:#fff;
+  background:linear-gradient(135deg,#ff0b57,#ff6b81);
+  box-shadow:0 8px 20px rgba(255,11,64,0.5);
+}
+
+/* GALLERY */
+.gallery{
+  display:none;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:15px;
+  margin-top:20px;
+  z-index:5;
+}
+.gallery img{
+  width:180px;
+  height:180px;
+  object-fit:cover;
+  border-radius:15px;
+  margin:5px;
+  transition:0.5s;
+  box-shadow:0 0 25px rgba(255,107,129,0.4);
+}
+.gallery img:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 35px #ff0b57,0 0 50px #ff6b81;
+}
+
+/* LETTER */
+.letter{
+  display:none;
+  width:80%;
+  max-width:600px;
+  background:rgba(0,0,0,0.6); /* semi-transparent */
+  border:2px solid #ff0b57;
+  border-radius:20px;
+  padding:35px 40px;
+  font-family:'Dancing Script', cursive;
+  font-size:1.9rem; /* বড় text */
+  color:#ff6b81;
+  position:relative;
+  margin:30px auto; /* horizontally center */
+  z-index:1;
+  line-height:1.6;
+  box-shadow:0 0 25px #ff0b57, 0 0 40px #ff6b81;
+}
+
+/* Typewriter */
+.letter-text{
+  overflow:hidden;
+  white-space:pre-wrap;
+  border-right:3px solid #ff0b57;
+  display:inline-block;
+  font-size:1.9rem; /* বড় text */
+}
+
+/* Cinematic text left side */
+#cinemaText{
+  position: fixed;
+  top:200px;           /* Our Memories এর নিচে */
+  left:10px;           /* left side edge */
+  font-family:'Dancing Script', cursive;
+  font-size:2.5rem;    
+  color:#ff6b81;
+  text-shadow:0 0 25px #ff0b57,0 0 50px #ff6b81;
+  z-index:999;
+  display:none;
+  font-weight:bold;
+  text-align:left;
+}
+
+/* NO BUTTON DODGE */
+#noBtn{position:relative;}
+
+/* Petals & Hearts */
+.petals, .hearts{
+  position:absolute;
+  top:-50px;
+  pointer-events:none;
+  z-index:1;
+}
+</style>
+</head>
+<body>
+
+<div class="section" id="firstPage">
+  <h1>Will You Be My Valentine? 💖</h1>
+  <button id="yesBtn">Yes 💌</button>
+  <button id="noBtn">No 😢</button>
+</div>
+
+<!-- Gallery -->
+<div class="gallery" id="gallery">
+  <h3 style="color:#ff6b81; font-family:'Dancing Script', cursive;">Our Memories 📸</h3>
+  <img src="img1.jpg" class="memories">
+  <img src="img2.jpeg" class="memories">
+  <img src="img3.jpeg" class="memories">
+  <img src="img4.jpeg" class="memories">
+</div>
+
+<!-- Letter -->
+<div class="letter" id="letter">
+  <span class="letter-text" id="letterText"></span>
+</div>
+
+<!-- Cinematic text -->
+<div id="cinemaText">Forever Mine 💖💫</div>
+
+<div id="counter"></div>
+
+<script>
+// COUNTER
+const startDate=new Date("2022-04-10T00:00:00");
+function startCounter(){
+  setInterval(()=>{
+    const now=new Date();
+    let years=now.getFullYear()-startDate.getFullYear();
+    let months=now.getMonth()-startDate.getMonth();
+    let days=now.getDate()-startDate.getDate();
+    if(days<0){months--;days+=30;}
+    if(months<0){years--;months+=12;}
+    const diff=now-startDate;
+    const hours=Math.floor((diff/(1000*60*60))%24);
+    const minutes=Math.floor((diff/(1000*60))%60);
+    const seconds=Math.floor((diff/1000)%60);
+    document.getElementById("counter").innerHTML=
+      `${years}Y ${months}M ${days}D | ${hours}H ${minutes}M ${seconds}S`;
+  },1000);
+}
+
+// TYPEWRITER
+function typeWriter(text, i, fnCallback){
+  if(i < text.length){
+    document.getElementById("letterText").innerHTML = text.substring(0,i+1)+'<span class="cursor">|</span>';
+    setTimeout(()=>typeWriter(text,i+1,fnCallback),50);
+  } else { if(fnCallback) fnCallback(); }
+}
+
+// YES CLICK
+document.getElementById("yesBtn").addEventListener("click",()=>{
+  document.getElementById("firstPage").style.display="none";
+  document.getElementById("gallery").style.display="flex";
+  document.getElementById("letter").style.display="block";
+  document.getElementById("cinemaText").style.display="block";
+  document.getElementById("counter").style.display="block";
+
+  const fullText = `My Love ❤️\n\nSince April 10, 2022,\nOti,\nyou have filled my life with happiness, peace,\nand endless love 💕✨\nYou make my heart smile every day. Just being with you feels like home.\nI love you more than words can say💕✨.`;
+  typeWriter(fullText,0);
+});
+
+// NO BUTTON DODGE
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", () => {
+  const btnWidth = noBtn.offsetWidth;
+  const btnHeight = noBtn.offsetHeight;
+  const newX = Math.random() * (window.innerWidth - btnWidth);
+  const newY = Math.random() * (window.innerHeight - btnHeight);
+  noBtn.style.position = "absolute";
+  noBtn.style.left = newX + "px";
+  noBtn.style.top = newY + "px";
+});
+noBtn.addEventListener("click",()=>{}); // do nothing
+
+startCounter();
+
+// FALLING ROSE PETALS
+function createPetal(){
+  const petal=document.createElement("div");
+  petal.classList.add("petals");
+  petal.style.width="20px";
+  petal.style.height="20px";
+  petal.style.background="url('https://i.ibb.co/Zm8MWDc/rose-petal.png') no-repeat center/contain";
+  petal.style.left=Math.random()*window.innerWidth+"px";
+  petal.style.top="-50px";
+  petal.style.opacity=Math.random();
+  document.body.appendChild(petal);
+
+  const speed=1+Math.random()*2;
+  const rotate=Math.random()*360;
+  let y=-50;
+  function fall(){
+    y+=speed;
+    petal.style.top=y+"px";
+    petal.style.transform=`rotate(${rotate+y*2}deg)`;
+    if(y>window.innerHeight+50){petal.remove();}
+    else requestAnimationFrame(fall);
+  }
+  fall();
+}
+setInterval(createPetal,300);
+
+// FLOATING HEARTS
+function createHeart(){
+  const heart=document.createElement("div");
+  heart.classList.add("hearts");
+  heart.innerHTML="❤️";
+  heart.style.fontSize=(10+Math.random()*20)+"px";
+  heart.style.left=Math.random()*window.innerWidth+"px";
+  heart.style.top=window.innerHeight+"px";
+  heart.style.opacity=Math.random();
+  document.body.appendChild(heart);
+
+  const speed=1+Math.random()*2;
+  let y=window.innerHeight;
+  function floatUp(){
+    y-=speed;
+    heart.style.top=y+"px";
+    if(y<-50){heart.remove();}
+    else requestAnimationFrame(floatUp);
+  }
+  floatUp();
+}
+setInterval(createHeart,700);
+</script>
+</body>
+</html>
